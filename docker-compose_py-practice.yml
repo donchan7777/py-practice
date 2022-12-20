@@ -1,0 +1,14 @@
+version: '3'
+
+
+services:
+  web:
+    build:
+      context: "."
+      dockerfile: "Dockerfile-py-practice"
+    ports:
+      - '8888:8888'
+    volumes:
+      - '.:/py_practice'
+    tty: true
+    stdin_open: true
