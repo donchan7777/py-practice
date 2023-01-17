@@ -1,0 +1,1 @@
+from myfirstpackege.subdir.module2 import *

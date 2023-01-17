@@ -13,3 +13,7 @@ def anotherfunc2():
     
 myvariable  = "This is global variable"
 
+
+if __name__ == "__main__":
+    print("This is mymodule")
+
