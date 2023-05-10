@@ -1,0 +1,24 @@
+FROM --platform=linux/amd64 ubuntu:latest
+
+# update
+RUN apt-get update && apt-get install -y \
+	sudo \
+	libgl1-mesa-dev \
+	wget \
+	vim
+
+#install anaconda3
+WORKDIR /opt
+RUN wget https://repo.continuum.io/archive/Anaconda3-2023.03-1-Linux-x86_64.sh && \
+	sh Anaconda3-2023.03-1-Linux-x86_64.sh -b -p /opt/anaconda3 && \
+	rm -f Anaconda3-2023.03-1-Linux-x86_64.sh
+
+ENV PATH /opt/anaconda3/bin:$PATH
+
+# update pip and install packages
+RUN pip install --upgrade pip && \
+    pip install opencv-python && \
+    pip install nibabel
+
+WORKDIR /
+CMD ["jupyter","lab","--ip=0.0.0.0","--allow-root","--LabApp.token=''"]

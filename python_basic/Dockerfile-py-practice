@@ -1,8 +1,11 @@
 FROM ubuntu:latest
+# update
 RUN apt-get update && apt-get install -y \
 	sudo \
 	wget \
 	vim
+
+#install anaconda3
 WORKDIR /opt
 RUN wget https://repo.continuum.io/archive/Anaconda3-2022.10-Linux-aarch64.sh && \
 	sh Anaconda3-2022.10-Linux-aarch64.sh -b -p /opt/anaconda3 && \
@@ -11,10 +14,8 @@ RUN wget https://repo.continuum.io/archive/Anaconda3-2022.10-Linux-aarch64.sh &&
 ENV PATH /opt/anaconda3/bin:$PATH
 
 # update pip and install packages
-RUN pip install --upgrade pip && \
-    pip install opencv-python && \
-    pip install nibabel
 
 RUN pip install --upgrade pip
+
 WORKDIR /
 CMD ["jupyter","lab","--ip=0.0.0.0","--allow-root","--LabApp.token=''"]
